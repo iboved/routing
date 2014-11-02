@@ -17,9 +17,9 @@ $router = new RouteCollector();
 $router->get('/', [$indexController,'indexAction']);
 
 $router->get('/articles/{id}', [$articleController,'getArticleAction']);
-$router->put('/articles/{id}', [$articleController,'getArticleAction']);
-$router->post('/articles/{id}', [$articleController,'getArticleAction']);
-$router->delete('/articles/{id}', [$articleController,'getArticleAction']);
+$router->put('/articles/{id}', [$articleController,'putArticleAction']);
+$router->post('/articles/{id}', [$articleController,'postArticleAction']);
+$router->delete('/articles/{id}', [$articleController,'deleteArticleAction']);
 $router->get('/articles', [$articleController,'getArticlesAction']);
 
 $dispatcher = new Phroute\Dispatcher($router);
