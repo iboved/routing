@@ -2,7 +2,27 @@
 
 require_once 'vendor/autoload.php';
 
-use Iboved\Model\Article;
+use Symfony\Component\HttpFoundation\Request;
+use Iboved\Controller\ArticleController;
+use Iboved\Controller\IndexController;
+use Phroute\RouteCollector;
 
-$obj = new Article();
-$obj->sayHello();
+$request = Request::createFromGlobals();
+
+$articleController = new ArticleController();
+$indexController = new IndexController();
+
+$router = new RouteCollector();
+
+$router->get('/', [$indexController,'indexAction']);
+
+$router->get('/articles/{id}', [$articleController,'getArticleAction']);
+$router->put('/articles/{id}', [$articleController,'getArticleAction']);
+$router->post('/articles/{id}', [$articleController,'getArticleAction']);
+$router->delete('/articles/{id}', [$articleController,'getArticleAction']);
+$router->get('/articles', [$articleController,'getArticlesAction']);
+
+$dispatcher = new Phroute\Dispatcher($router);
+$response = $dispatcher->dispatch($request->getMethod(), parse_url($request->getPathInfo(), PHP_URL_PATH));
+
+$response->send();

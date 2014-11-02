@@ -5,8 +5,15 @@ namespace Iboved\Model;
 
 class Article
 {
-    public function sayHello()
+    protected $title;
+
+    public function setTitle($title)
     {
-        echo "Hello, my friend!";
+        $this->title = $title;
     }
-} 
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
